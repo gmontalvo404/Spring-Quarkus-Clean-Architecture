@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.transaction.Transactional;
+
 @RestController
 public class SongCreateApi implements SongApi {
 
@@ -18,6 +20,7 @@ public class SongCreateApi implements SongApi {
         this.songCreateService = songCreateService;
     }
 
+    @Transactional
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity createSong(@RequestBody SongCreateRequest songCreateRequest) {
         songCreateService.createSong(songCreateRequest);

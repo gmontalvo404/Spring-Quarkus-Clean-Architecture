@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.transaction.Transactional;
+
 @RestController
 public class SongDeleteApi implements SongApi {
 
@@ -17,6 +19,7 @@ public class SongDeleteApi implements SongApi {
         this.songDeleteService = songDeleteService;
     }
 
+    @Transactional
     @DeleteMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity deleteSong(@PathVariable(name = "id") Long id) {
         songDeleteService.deleteSong(id);

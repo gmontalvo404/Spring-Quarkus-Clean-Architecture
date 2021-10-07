@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.transaction.Transactional;
+
 @RestController
 public class SongFindByIdApi implements SongApi {
 
@@ -19,6 +21,7 @@ public class SongFindByIdApi implements SongApi {
         this.songFindByIdService = songFindByIdService;
     }
 
+    @Transactional
     @GetMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity deleteSong(@PathVariable(name = "id") Long id) {
         try {
